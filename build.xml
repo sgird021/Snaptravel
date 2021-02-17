@@ -1,0 +1,66 @@
+<project name="SnapTravel" basedir="." default="run">
+	<property name="srcdir" location="src"/>
+	<property name="builddir" location="build"/>
+	<property name="testdir" location="${builddir}/test"/>
+	<property name="jardir" location="${builddir}/jar"/>
+	<property name="libdir" location="jars"/>
+	<property name="screenshotdir" location="screenshot"/>
+	<property name="full-compile" value="true"/>
+	<property name="main-class" value="com.snaptravel.hotelbooking.core.TestNgMain"/>
+
+	<property name="test-outputdir" location="test-output"/>
+	<property name="test-logdir" location="output-log"/>
+
+	<taskdef name="testng" classname="org.testng.TestNGAntTask">
+		<classpath>
+			<pathelement location="Jars/testng-6.9.9.jar"/>
+		</classpath>
+	</taskdef>
+
+	<path id="classpath.base" />
+	   <path id="classpath.test">
+	   		<fileset dir="${libdir}">
+	   			<include name="**/*.jar"/>
+	   		</fileset>
+	   	  	<pathelement location="${testdir}"/>
+			<pathelement location="${srcdir}"/>
+	   		<path refid="classpath.base"/>
+	   </path>
+
+	<target name="init">
+		<delete dir="${builddir}"/>
+		<delete dir="${test-outputdir}"/>
+		<delete dir="${screenshotdir}"/>
+
+		<mkdir dir="${builddir}"/>
+		<mkdir dir="${testdir}"/>
+		<mkdir dir="${jardir}"/>
+		<mkdir dir="${test-outputdir}"/>
+		<mkdir dir="${screenshotdir}"/>
+	</target>
+
+
+
+	<target name="compile" depends="init">
+		<javac srcdir="${srcdir}" destdir="${testdir}" verbose="${full-compile}">
+			<classpath refid="classpath.test"/>
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar destfile="${jardir}/${ant.project.name}.jar" basedir="${testdir}">
+			<zipgroupfileset dir="${libdir}" includes="*.jar"/>
+			<zipgroupfileset dir="${libdir}" includes="*.jar" excludes="*.exe"/>
+			<manifest>
+				<attribute name="main-class" value="${main-class}"/>
+				<attribute name="class-path" value="${testdir}"/>
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="run" depends="jar">
+		<java jar="${jardir}/${ant.project.name}.jar" fork="true"/>
+	</target>
+
+
+</project>
