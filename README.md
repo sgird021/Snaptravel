@@ -14,7 +14,7 @@ This repository will contain all UI automation for SnapTravel
 6. Single test run can be executed by configuring the TestNG run. 
 
 ## **Test Plan**
-######  Scope: 
+##  Scope: 
 - Scenario : Booking a hotel: A customer searches for a hotel and then reserve the room by completing the payment.
 Perform regression(manual and automation) and E2E tests and generate test results. 
 
