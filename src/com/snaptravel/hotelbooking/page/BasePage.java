@@ -1,4 +1,4 @@
-package com.snaptravel.hotelbooking.page;
+package   com.snaptravel.hotelbooking.page;
 
 import com.snaptravel.hotelbooking.util.Utils;
 import org.openqa.selenium.By;
