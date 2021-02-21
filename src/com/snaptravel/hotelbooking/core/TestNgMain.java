@@ -16,7 +16,7 @@ public class TestNgMain {
 
 	public static void main(String[] args){
 
-		List<String> file = new ArrayList<String>();
+		List<String> file  = new ArrayList<String>();
 		//file.add("./testng_smoke.xml");
 		file.add("./testng.xml");
 		TestNG testng = new TestNG();
